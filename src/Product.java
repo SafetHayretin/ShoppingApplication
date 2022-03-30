@@ -4,6 +4,9 @@ public class Product {
 
     private double productPrice;
 
+    /**
+     * Products class with name and price
+     */
     public Product(String productName, double productPrice) {
         this.productName = productName;
         this.productPrice = productPrice;
