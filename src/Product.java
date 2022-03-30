@@ -1,22 +1,30 @@
+
+/**
+ * Products class with name and price
+ */
+
 public class Product {
 
-    private String productName;
+    private String name;
 
-    private double productPrice;
+    private double price;
 
-    /**
-     * Products class with name and price
-     */
-    public Product(String productName, double productPrice) {
-        this.productName = productName;
-        this.productPrice = productPrice;
+    public Product(String name, double price) {
+        if (name == null || name.equals("")) {
+            throw new IllegalArgumentException("Name can't be empty!");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("Price can't be negative!");
+        }
+        this.name = name;
+        this.price = price;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public double getProductPrice() {
-        return productPrice;
+    public double getPrice() {
+        return price;
     }
 }

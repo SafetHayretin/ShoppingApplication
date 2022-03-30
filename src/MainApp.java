@@ -1,7 +1,7 @@
 public class MainApp {
 
     public static void main(String[] args) {
-        //list of our products
+        //List of our products
         Product[] products = new Product[5];
         products[0] = new Product("Elden ring", 59.99);
         products[1] = new Product("Fifa 22", 39.99);
@@ -12,14 +12,16 @@ public class MainApp {
         //Selecting the quantity
         CartItem item = new CartItem(products[2], 2);
         CartItem item2 = new CartItem(products[4], 1);
-        CartItem item3 = new CartItem(products[1], 1);
+        CartItem item3 = new CartItem(products[1]);
 
         //Adding items to cart
         Cart cart = new Cart();
         cart.addProduct(item);
         cart.addProduct(item2);
         cart.addProduct(item3);
-        cart.toString();
+
+        //Prints our cart products
+        System.out.println(cart);
     }
 
 }
