@@ -3,50 +3,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+    private static final DecimalFormat formatSecondDigit = new DecimalFormat("0.00");
 
     private List<CartItem> items = new ArrayList<>();
 
-    private int deliveryFee = calculateDeliveryFee();
-
-    private double itemsSumPrice = 0;
-
-    public void classProperties() {
+    //Displays all items in cart, delivery price, and final price after taxes
+    @Override
+    public String toString() {
+        System.out.println("Items in cart:");
         for (CartItem item : items) {
-            item.displayProductType();
+            System.out.println(item.toString());
         }
-        System.out.println("Delivery fee: " + deliveryFee);
+        System.out.println("Delivery fee: " + calculateDeliveryFee());
+        System.out.println("Final price: " + formatSecondDigit.format(calculateItemsPrice() + calculateVat() + calculateDeliveryFee()));
+        return null;
     }
 
+    //calculates VAT from total price
     public double calculateVat() {
-        calculateItemsPrice();
-        return itemsSumPrice * 1.2;
+        return calculateItemsPrice() * 0.2;
     }
 
-    public void calculateItemsPrice() {
+    //Calculates all products price before taxes
+    public double calculateItemsPrice() {
+        double itemsSumPrice = 0;
         for (CartItem item : items) {
             itemsSumPrice += item.calculateTotalPrice();
         }
+        return itemsSumPrice;
     }
 
+    //Calculates delivery fee
     public int calculateDeliveryFee() {
-        if (calculateVat() < 100) {
+        if (calculateItemsPrice() + calculateVat() < 100) {
             return 10;
         }
-        if (calculateVat() < 200) {
+        if (calculateItemsPrice() + calculateVat() < 200) {
             return 5;
         }
         return 0;
     }
 
-    public void displayFinalPrice() {
-        System.out.println("Final price: " + df.format(calculateVat() + deliveryFee));
-    }
-
+    //Adds product to our cart
     public void addProduct(CartItem item) {
         items.add(item);
     }
 
+    //Removes products from our cart
     public void removeProduct(CartItem item) {
         items.remove(item);
     }
