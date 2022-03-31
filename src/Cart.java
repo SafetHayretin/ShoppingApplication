@@ -2,52 +2,80 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Shows everything in our cart
+ * Calculates total price
+ * From total price calculates VAT
+ * Calculates our delivery fee
+ * After calculating everything, displays all products in cart and their quantity
+ * Displays delivery fee and total cost
+ */
+
 public class Cart {
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+
+    private static final DecimalFormat formatSecondDigit = new DecimalFormat("0.00");
+
+    private final double vatPercentage = 0.2;
 
     private List<CartItem> items = new ArrayList<>();
 
-    private int deliveryFee = calculateDeliveryFee();
-
-    private double itemsSumPrice = 0;
-
-    public void classProperties() {
-        for (CartItem item : items) {
-            item.displayProductType();
-        }
-        System.out.println("Delivery fee: " + deliveryFee);
-    }
-
-    public double calculateVat() {
-        calculateItemsPrice();
-        return itemsSumPrice * 1.2;
-    }
-
-    public void calculateItemsPrice() {
+    /**
+     * Calculates all products price before taxes
+     */
+    public double calculateItemsPrice() {
+        double itemsSumPrice = 0;
         for (CartItem item : items) {
             itemsSumPrice += item.calculateTotalPrice();
         }
+        return itemsSumPrice;
     }
 
-    public int calculateDeliveryFee() {
-        if (calculateVat() < 100) {
+    /**
+     * Calculates VAT from total price
+     */
+    public double calculateVat() {
+        return calculateItemsPrice() * vatPercentage;
+    }
+
+    /**
+     * Calculates delivery fee
+     */
+    public double calculateDeliveryFee() {
+        double priceWithTaxes = calculateItemsPrice() + calculateVat();
+        if (priceWithTaxes < 100) {
             return 10;
         }
-        if (calculateVat() < 200) {
+        if (priceWithTaxes < 200) {
             return 5;
         }
         return 0;
     }
 
-    public void displayFinalPrice() {
-        System.out.println("Final price: " + df.format(calculateVat() + deliveryFee));
-    }
-
+    /**
+     * Adds product to our cart
+     */
     public void addProduct(CartItem item) {
         items.add(item);
     }
 
+    /**
+     * Removes products from our cart
+     */
     public void removeProduct(CartItem item) {
         items.remove(item);
+    }
+
+    /**
+     * Displays all items in cart, delivery price, and final price after taxes
+     */
+    @Override
+    public String toString() {
+        String itemsInCart = "";
+        for (CartItem item : items) {
+            itemsInCart = itemsInCart.concat(item.toString());
+        }
+        return "Items in cart: \n" + itemsInCart + '\n' +
+                "Delivery fee: " + formatSecondDigit.format(calculateDeliveryFee()) + '\n' +
+                "Final price: " + formatSecondDigit.format(calculateItemsPrice() + calculateVat() + calculateDeliveryFee()) +'\n';
     }
 }
