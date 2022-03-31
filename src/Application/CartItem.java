@@ -1,3 +1,5 @@
+package Application;
+
 /**
  * Takes product type and quantity and calculating total price.
  */
@@ -10,7 +12,7 @@ public class CartItem {
 
     public CartItem(Product product, int quantity) {
         if (product == null) {
-            throw new IllegalArgumentException("Product doesn't exist!");
+            throw new IllegalArgumentException("Application.Product doesn't exist!");
         }
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity can't be zero or negative!");
@@ -32,6 +34,6 @@ public class CartItem {
 
     @Override
     public String toString() {
-        return "Product name: " + product.getName() + "\nQuantity: " + quantity + '\n';
+        return "Application.Product name: " + product.getName() + "\nQuantity: " + quantity + '\n';
     }
 }
