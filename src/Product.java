@@ -1,4 +1,3 @@
-
 /**
  * Products class with name and price
  */
@@ -10,7 +9,7 @@ public class Product {
     private double price;
 
     public Product(String name, double price) {
-        if (name == null || name.equals("")) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name can't be empty!");
         }
         if (price < 0) {

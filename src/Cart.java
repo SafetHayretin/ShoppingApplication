@@ -40,7 +40,7 @@ public class Cart {
     /**
      * Calculates delivery fee
      */
-    public int calculateDeliveryFee() {
+    public double calculateDeliveryFee() {
         double priceWithTaxes = calculateItemsPrice() + calculateVat();
         if (priceWithTaxes < 100) {
             return 10;
@@ -75,7 +75,7 @@ public class Cart {
             itemsInCart = itemsInCart.concat(item.toString());
         }
         return "Items in cart: \n" + itemsInCart + '\n' +
-                "Delivery fee: " + calculateDeliveryFee() + '\n' +
-                "Final price: " + formatSecondDigit.format(calculateItemsPrice() + calculateVat() + calculateDeliveryFee());
+                "Delivery fee: " + formatSecondDigit.format(calculateDeliveryFee()) + '\n' +
+                "Final price: " + formatSecondDigit.format(calculateItemsPrice() + calculateVat() + calculateDeliveryFee()) +'\n';
     }
 }

@@ -1,5 +1,4 @@
 public class MainApp {
-
     public static void main(String[] args) {
         //List of our products
         Product[] products = new Product[5];
@@ -7,7 +6,7 @@ public class MainApp {
         products[1] = new Product("Fifa 22", 39.99);
         products[2] = new Product("GTA V", 34.99);
         products[3] = new Product("F1 2021", 17.99);
-        products[4] = new Product("LEGO Star Wars", 120);
+        products[4] = new Product("LEGO Star Wars", 120.00);
 
         //Selecting the quantity
         CartItem item = new CartItem(products[2], 2);
@@ -22,6 +21,11 @@ public class MainApp {
 
         //Prints our cart products
         System.out.println(cart);
-    }
 
+        //Removing items from cart
+        cart.removeProduct(item2);
+
+        //Prints our cart products
+        System.out.println(cart);
+    }
 }
