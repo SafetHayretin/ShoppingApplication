@@ -1,3 +1,5 @@
+package Application;
+
 /**
  * Products class with name and price
  */

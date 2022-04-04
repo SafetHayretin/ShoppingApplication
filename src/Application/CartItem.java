@@ -1,3 +1,5 @@
+package Application;
+
 /**
  * Takes product type and quantity and calculating total price.
  */
