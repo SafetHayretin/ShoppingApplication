@@ -6,17 +6,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CartItemTest {
-
     @Test
     public void calculatedTotalPriceShouldBeHundredAndSixty() {
-        //given
+        //Given
         Product product = new Product("Star Wars", 80);
         CartItem item = new CartItem(product, 2);
 
-        //when
+        //When
         double calculatedPrice = item.calculateTotalPrice();
 
-        //then
+        //Then
         assertEquals(160, calculatedPrice);
     }
 
